@@ -1,43 +1,28 @@
 {
   "name": "cra-template-cobuildlab",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.1",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^12.20.3",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.2",
-    "typescript": "^4.1.5",
-    "web-vitals": "^1.1.0"
+  "private": false,
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "typescript"
+  ],
+  "description": "The base TypeScript template for Create React App.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cobuildlab/cra-template-cobuildlab.git",
+    "directory": "packages/cra-template-typescript"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "bugs": {
+    "url": "https://github.com/cobuildlab/cra-template-cobuildlab/issues"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "files": [
+    "template",
+    "template.json"
+  ]
 }
