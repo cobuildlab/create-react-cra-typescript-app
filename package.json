@@ -1,28 +1,69 @@
 {
-  "name": "cra-template-cobuildlab",
+  "name": "react-starter",
   "version": "0.1.0",
-  "private": false,
-  "keywords": [
-    "react",
-    "create-react-app",
-    "template",
-    "typescript"
-  ],
-  "description": "The base TypeScript template for Create React App.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cobuildlab/cra-template-cobuildlab.git",
-    "directory": "packages/cra-template-typescript"
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "d": "^1.0.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-airbnb-typescript-prettier": "^4.2.0",
+    "jest": "^26.6.0",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.1.2",
+    "web-vitals": "^1.0.1"
   },
-  "license": "MIT",
-  "engines": {
-    "node": ">=10"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
-  "bugs": {
-    "url": "https://github.com/cobuildlab/cra-template-cobuildlab/issues"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "files": [
-    "template",
-    "template.json"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged",
+      "pre-push:": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts, tsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "npm run build"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-jsdoc": "^32.3.0",
+    "eslint-plugin-react": "^7.23.2",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4"
+  }
 }
