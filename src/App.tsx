@@ -1,28 +1,25 @@
-import React, { ReactElement } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React  from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
+import { Routes } from './routes/routes';
+import { client } from './shared/apollo/client';
+import './shared/css/App.css';
 
 /**
- * @returns {ReactElement} Return a reactElement.
+ * @returns {JSX.Element} - Main app component.
  */
-export function App():ReactElement {
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Auth0ProviderWithHistory>
+        <ApolloProvider client={client}>
+          <Routes />
+        </ApolloProvider>
+      </Auth0ProviderWithHistory>
+    </BrowserRouter>
   );
 }
 
+// eslint-disable-next-line import/no-default-export
+export default App;
