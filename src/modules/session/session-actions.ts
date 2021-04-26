@@ -1,6 +1,6 @@
 import { OnFetchSession, OnFetchSessionError } from './session-events';
 import { FETCH_SESSION_QUERY } from './session-queries';
-import { client } from '../../shared/apollo/client';
+import { apolloClient as client } from '../../shared/apollo';
 import { FetchSessionResponse } from './session-types';
 
 /**

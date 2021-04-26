@@ -12,6 +12,7 @@ import {
   WORKSPACE_ENDPOINT,
   EIGHTBASE_WS_ENDPOINT,
   WORKSPACE_ID,
+  ENVIRONMENT_NAME,
 } from '../constants';
 import { OnTokenEvent } from '../events/token-event';
 
@@ -24,25 +25,39 @@ export function createApolloClient(
   getToken: () => string,
   headers = {},
 ): ApolloClient<NormalizedCacheObject> {
+  const environmentName =
+    ENVIRONMENT_NAME &&
+    ENVIRONMENT_NAME.length > 0 &&
+    ENVIRONMENT_NAME.toLowerCase() !== 'master'
+      ? ENVIRONMENT_NAME
+      : undefined;
   const httpLink = new HttpLink({
     uri: WORKSPACE_ENDPOINT,
   });
 
-  const authLink = setContext((_, { headers: _headers }) => ({
-    headers: {
-      ...headers,
-      ..._headers,
-      authorization: `Bearer ${getToken()}`,
-    },
-  }));
+  const authLink = setContext((_, { headers: _headers }) => {
+    const token = getToken();
+    return {
+      headers: {
+        ...headers,
+        ..._headers,
+        authorization: `Bearer ${token}`,
+      },
+    };
+  });
   const wsLink = new WebSocketLink({
     uri: `${EIGHTBASE_WS_ENDPOINT}`,
     options: {
       reconnect: true,
-      connectionParams: () => ({
-        token: getToken(),
-        workspaceId: WORKSPACE_ID,
-      }),
+      lazy: true,
+      connectionParams: () => {
+        const token = getToken();
+        return {
+          token,
+          environmentName,
+          workspaceId: WORKSPACE_ID,
+        };
+      },
     },
     webSocketImpl: class WebSocketWithoutProtocol extends WebSocket {
       // eslint-disable-next-line @typescript-eslint/no-useless-constructor
@@ -71,6 +86,6 @@ export function createApolloClient(
   return client;
 }
 
-export const client = createApolloClient(
+export const apolloClient: ApolloClient<NormalizedCacheObject> = createApolloClient(
   () => OnTokenEvent.get()?.token as string,
 );

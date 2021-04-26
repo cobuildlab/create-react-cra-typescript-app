@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { ProtectedRoute } from './ProtectedRoute';
 import { Auth } from '../modules/auth/Auth';
 import { AuthCallback } from '../modules/auth/auth-callback/AuthCallback';
-import { Session } from '../modules/session/Session';
+
 import { Logout } from '../modules/auth/Logout';
 import {
   useSetupAuth0Token,
@@ -42,11 +42,9 @@ export const Routes: React.FC = () => {
         <Route exact path="/auth/callback" component={AuthCallback} />
         <Route path="/logout" component={Logout} />
         <ProtectedRoute path="/">
-          <Session>
-            <Layout>
-              <Route path="/dashboard" component={Dashboard} exact />
-            </Layout>
-          </Session>
+          <Layout>
+            <Route path="/dashboard" component={Dashboard} exact />
+          </Layout>
         </ProtectedRoute>
       </Switch>
     </>

@@ -3,7 +3,7 @@ import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
 import { Routes } from './routes/routes';
-import { client } from './shared/apollo/client';
+import { apolloClient as client } from './shared/apollo';
 import './shared/css/App.css';
 
 /**

@@ -74,6 +74,11 @@
           "typedefs": true
         }
       ],
+      "react/button-has-type": [0, {
+        "button": true,
+        "submit": true,
+        "reset": false
+      }],
       "jsdoc/check-alignment": "error",
       "jsdoc/check-param-names": "error",
       "jsdoc/check-tag-names": "error",
