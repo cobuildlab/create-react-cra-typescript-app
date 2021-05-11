@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
