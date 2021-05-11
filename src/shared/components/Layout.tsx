@@ -1,4 +1,20 @@
-import React  from 'react';
+import React from 'react';
+import { createStyles, makeStyles, Theme, Toolbar } from '@material-ui/core';
+import { Sidebar } from './Sidebar';
+import { Topbar } from './Topbar';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+    },
+  }),
+);
+
 /**
  * @param {object}props - Props.
  * @param {JSX.Element} props.children - Children to render.
@@ -7,8 +23,18 @@ import React  from 'react';
 export function Layout({
   children,
 }: {
-  // eslint-disable-next-line react/require-default-props
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }): JSX.Element {
-  return <div>{children}</div>;
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <Topbar />
+      <Sidebar />
+      <main className={classes.content}>
+        <Toolbar />
+        {children}
+      </main>
+    </div>
+  );
 }

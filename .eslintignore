@@ -2,4 +2,5 @@
 node_modules
 build
 public
+jest.config.ts
 *-test.*
