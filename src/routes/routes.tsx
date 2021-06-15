@@ -11,7 +11,7 @@ import {
 } from '../modules/auth/auth-hooks';
 import { MainLoader } from '../shared/components/MainLoader';
 import { Layout } from '../shared/components/Layout';
-import { Dashboard } from '../modules/dashboard/DashboradView';
+import { HomeView } from '../modules/home/HomeView';
 
 /*
 WARNING: It is not necessary to add a protected route to each component within session, 
@@ -32,7 +32,7 @@ export const Routes: React.FC = () => {
 
   const loadingToken = useSetupAuth0Token();
 
-  useDefaultRedirect('/dashboard');
+  useDefaultRedirect('/home');
   return loadingToken ? (
     <MainLoader />
   ) : (
@@ -43,7 +43,7 @@ export const Routes: React.FC = () => {
         <Route path="/logout" component={Logout} />
         <ProtectedRoute path="/">
           <Layout>
-            <Route path="/dashboard" component={Dashboard} exact />
+            <Route path="/home" component={HomeView} exact />
           </Layout>
         </ProtectedRoute>
       </Switch>

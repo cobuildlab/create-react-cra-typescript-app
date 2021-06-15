@@ -1,9 +1,9 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/core';
+import { theme } from './shared/mui-theme';
 import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
 import { Routes } from './routes/routes';
-import { apolloClient as client } from './shared/apollo';
 import './shared/css/App.css';
 
 /**
@@ -13,9 +13,9 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Auth0ProviderWithHistory>
-        <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
           <Routes />
-        </ApolloProvider>
+        </ThemeProvider>
       </Auth0ProviderWithHistory>
     </BrowserRouter>
   );
