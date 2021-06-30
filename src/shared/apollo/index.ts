@@ -50,6 +50,11 @@ export function createApolloClient(
     options: {
       reconnect: true,
       lazy: true,
+      /** 
+       * ConnectionParams.
+       * 
+       * @returns Websocket payload.
+       */
       connectionParams: () => {
         const token = getToken();
         return {
@@ -60,6 +65,9 @@ export function createApolloClient(
       },
     },
     webSocketImpl: class WebSocketWithoutProtocol extends WebSocket {
+      /**
+       * @param url - Url.
+       */
       // eslint-disable-next-line @typescript-eslint/no-useless-constructor
       constructor(url: string) {
         super(url); // ignore protocol

@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+/**
+ * @returns Component.
+ */
 export const Topbar: React.FC = () => {
   const classes = useStyles();
   const { logout } = useAuth0();
@@ -31,14 +34,23 @@ export const Topbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  /**
+   * @param event - Event.
+   */
   const handleMenu = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget);
   };
 
+  /**
+   *
+   */
   const handleClose = (): void => {
     setAnchorEl(null);
   };
 
+  /**
+   * @returns Void.
+   */
   const handleLogout = (): void =>
     logout({
       returnTo: window.location.origin,

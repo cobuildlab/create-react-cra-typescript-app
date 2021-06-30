@@ -26,6 +26,9 @@ export function AuthCallback({ history }: RouteComponentProps): JSX.Element {
   useSetupAuth0Token();
 
   useEffect(() => {
+    /**
+     * Handle auth fucntion.
+     */
     const handleAuthentication = async (): Promise<void> => {
       const { email } = user;
       try {
