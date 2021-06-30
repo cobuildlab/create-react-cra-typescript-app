@@ -24,6 +24,9 @@ export function Auth0ProviderWithHistory({
 }): JSX.Element {
   const history = useHistory();
 
+  /**
+   * @param appState - State of the app.
+   */
   const onRedirectCallback = (appState: AppState): void => {
     history.push(appState?.returnTo || window.location.pathname);
   };

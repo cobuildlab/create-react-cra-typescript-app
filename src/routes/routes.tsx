@@ -27,6 +27,9 @@ an example of how to add the routes I will leave below
 
 */
 
+/**
+ * @returns Routes.
+ */
 export const Routes: React.FC = () => {
   // const { isLoading, error, isAuthenticated } = useAuth0();
 

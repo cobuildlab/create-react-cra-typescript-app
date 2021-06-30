@@ -30,6 +30,9 @@ const useStyles = makeStyles(() =>
   }),
 );
 
+/**
+ * @returns Component.
+ */
 export const Sidebar: React.FC = () => {
   const classes = useStyles();
 
