@@ -5,10 +5,6 @@ export interface User {
     shareUrl: string;
   };
 }
-export interface FetchSessionData {
+export interface SessionQuery {
   user: User;
-}
-
-export interface FetchSessionResponse {
-  data: FetchSessionData;
 }

@@ -12,3 +12,5 @@ export const OnTokenEvent = createEvent<InitialStateType>({
   initialValue: INITIAL_STATE,
 });
 export const OnTokenErrorEvent = createEvent<Error>();
+
+export const OnFetchSessionError = createEvent();

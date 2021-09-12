@@ -1,5 +1,17 @@
 import { gql } from '@apollo/client';
 
+export const FETCH_SESSION_QUERY = gql`
+  query FetchSessionQuery {
+    user {
+      id
+      email
+      avatar {
+        shareUrl
+      }
+    }
+  }
+`;
+
 export const CURRENT_USER_QUERY = gql`
   query CurrentUser {
     user {

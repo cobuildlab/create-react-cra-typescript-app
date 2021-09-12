@@ -2,10 +2,11 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { createAction } from '@cobuildlab/react-simple-state/lib/actions';
 import { useHistory } from 'react-router-dom';
-import {
-  OnTokenErrorEvent,
-  OnTokenEvent,
-} from '../../shared/events/token-event';
+import { useQuery } from '@apollo/client';
+import { OnTokenErrorEvent, OnTokenEvent } from './auth-events';
+import { FETCH_SESSION_QUERY } from './auth-queries';
+import { SessionQuery } from './auth-types';
+import { QueryResponse } from '../../shared/types';
 
 /**
  * @returns {void}
@@ -36,6 +37,7 @@ export function useSetupAuth0Token(): boolean {
   // TODO: hanlde the error case when fetching the token
   return loading;
 }
+
 /**
  * @param {string} route - Default path to redirect.
  * @returns {void}
@@ -50,4 +52,14 @@ export function useDefaultRedirect(route: string): void {
   }, [history, auth.isAuthenticated, route]);
 
   // TODO: hanlde the error case when fetching the token
+}
+
+/**
+ * Hook for returning the User Session.
+ *
+ * @returns {QueryResponse<SessionQuery>} The response.
+ */
+export function useSession(): QueryResponse<SessionQuery> | null {
+  const { loading, error, data } = useQuery<SessionQuery>(FETCH_SESSION_QUERY);
+  return { loading, error, data };
 }

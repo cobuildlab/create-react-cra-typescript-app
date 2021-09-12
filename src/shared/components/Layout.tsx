@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme, Toolbar } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
 /**
  * @param {object}props - Props.
  * @param {JSX.Element} props.children - Children to render.
-  @returns {JSX.Element} - Layout component of the app.
+ @returns {JSX.Element} - Layout component of the app.
  */
 export function Layout({
   children,
@@ -31,10 +31,7 @@ export function Layout({
     <div className={classes.root}>
       <Topbar />
       <Sidebar />
-      <main className={classes.content}>
-        <Toolbar />
-        {children}
-      </main>
+      <main className={classes.content}>{children}</main>
     </div>
   );
 }

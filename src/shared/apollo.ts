@@ -13,8 +13,8 @@ import {
   EIGHTBASE_WS_ENDPOINT,
   WORKSPACE_ID,
   ENVIRONMENT_NAME,
-} from '../constants';
-import { OnTokenEvent } from '../events/token-event';
+} from './constants';
+import { OnTokenEvent } from '../modules/auth/auth-events';
 
 /**
  * @param {Function} getToken - Function to get the token.
@@ -50,9 +50,9 @@ export function createApolloClient(
     options: {
       reconnect: true,
       lazy: true,
-      /** 
+      /**
        * ConnectionParams.
-       * 
+       *
        * @returns Websocket payload.
        */
       connectionParams: () => {
@@ -94,6 +94,5 @@ export function createApolloClient(
   return client;
 }
 
-export const apolloClient: ApolloClient<NormalizedCacheObject> = createApolloClient(
-  () => OnTokenEvent.get()?.token as string,
-);
+export const apolloClient: ApolloClient<NormalizedCacheObject> =
+  createApolloClient(() => OnTokenEvent.get()?.token as string);
