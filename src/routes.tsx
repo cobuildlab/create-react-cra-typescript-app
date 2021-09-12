@@ -5,7 +5,7 @@ import { Auth } from './modules/auth/Auth';
 import { AuthCallback } from './modules/auth/components/AuthCallback';
 import { Logout } from './modules/auth/Logout';
 import { Layout } from './shared/components/Layout';
-import { Dashboard } from './modules/dashboard/DashboradView';
+import { Dashboard } from './modules/dashboard/components/DashboradView';
 import { Session } from './modules/auth/Session';
 import { apolloClient as client } from './shared/apollo';
 import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
