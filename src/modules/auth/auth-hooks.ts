@@ -34,7 +34,7 @@ export function useSetupAuth0Token(): boolean {
     }
   }, [auth, auth.getIdTokenClaims, auth.isAuthenticated]);
 
-  // TODO: hanlde the error case when fetching the token
+  // TODO: handle the error case when fetching the token
   return loading;
 }
 
@@ -60,6 +60,7 @@ export function useDefaultRedirect(route: string): void {
  * @returns {QueryResponse<SessionQuery>} The response.
  */
 export function useSession(): QueryResponse<SessionQuery> | null {
-  const { loading, error, data } = useQuery<SessionQuery>(FETCH_SESSION_QUERY);
-  return { loading, error, data };
+  const { loading, error, data, refetch } =
+    useQuery<SessionQuery>(FETCH_SESSION_QUERY);
+  return { loading, error, data, refetch };
 }
