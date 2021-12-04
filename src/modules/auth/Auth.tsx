@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useEffect } from 'react';
 import { MainLoader } from '../../shared/components/MainLoader';
 
 // TODO add loading component
@@ -11,8 +11,7 @@ export function Auth(): JSX.Element {
 
   useEffect(() => {
     loginWithRedirect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [loginWithRedirect]);
 
   return <MainLoader />;
 }

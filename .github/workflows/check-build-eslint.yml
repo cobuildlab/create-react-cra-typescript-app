@@ -17,10 +17,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install, build, and test
+        env:
+          CI: true
+          ADMIN_TOKEN: ${{secrets.ADMIN_TOKEN}}
+          REACT_APP_WORKSPACE_ID: ${{secrets.WORKSPACE_ID}}
+          FIELDWORKER_TOKEN: ${{secrets.FIELDWORKER_TOKEN}}
         run: |
-          npm i --legacy-peer-deps
+          npm i
           npm run eslint
           npm run build --if-present
           npm run test
-        env:
-          CI: true

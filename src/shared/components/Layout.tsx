@@ -1,37 +1,47 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { Sidebar } from './Sidebar';
+import Box from '@mui/material/Box';
 import { Topbar } from './Topbar';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
-  }),
-);
+import { Sidebar } from './Sidebar';
+import { LAYOUT_SIZE } from '../css/theme';
 
 /**
  * @param {object}props - Props.
  * @param {JSX.Element} props.children - Children to render.
- @returns {JSX.Element} - Layout component of the app.
+  @returns {JSX.Element} - Layout component of the app.
  */
 export function Layout({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: ['0 1fr', `${LAYOUT_SIZE}px 1fr`],
+        gridTemplateRows: `${LAYOUT_SIZE}px 1fr`,
+        gridTemplateAreas: `
+        "sidebar topbar"
+        "sidebar main"
+      `,
+        height: '100vh',
+      }}
+    >
       <Topbar />
       <Sidebar />
-      <main className={classes.content}>{children}</main>
-    </div>
+      <Box
+        sx={{
+          gridArea: 'main',
+          padding: 3,
+          bgcolor: 'surfaceOverlay.main',
+          overflowY: 'auto',
+          maxHeight: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {children}
+      </Box>
+    </Box>
   );
 }

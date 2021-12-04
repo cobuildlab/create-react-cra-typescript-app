@@ -1,0 +1,22 @@
+overwrite: true
+schema: 'https://api.8base.com/ckwo0mt7s00am09jlg3js3dr4'
+documents: 'src/**/*.graphql'
+generates:
+  src/shared/types/generated.ts:
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations:
+          onlyOperationTypes: true
+          avoidOptionals:
+            field: true
+      - typescript-react-apollo
+    config:
+      maybeValue: T
+      scalars:
+        JSON: {}
+        DateTime: string
+        Date: string
+        BigInt: string
+        Time: string
