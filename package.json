@@ -60,7 +60,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --config codegen.yml -r dotenv/config"
   },
   "eslintConfig": {
     "extends": [

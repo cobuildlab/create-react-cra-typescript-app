@@ -7,5 +7,10 @@ query UserSession {
     avatar {
       shareUrl
     }
+    roles {
+      items {
+        name
+      }
+    }
   }
 }
