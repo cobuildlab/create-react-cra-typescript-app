@@ -5,11 +5,9 @@ on: pull_request
 jobs:
   build:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: ['14.x']
-
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -19,9 +17,6 @@ jobs:
       - name: npm install, build, and test
         env:
           CI: true
-          ADMIN_TOKEN: ${{secrets.ADMIN_TOKEN}}
-          REACT_APP_WORKSPACE_ID: ${{secrets.WORKSPACE_ID}}
-          FIELDWORKER_TOKEN: ${{secrets.FIELDWORKER_TOKEN}}
         run: |
           npm i
           npm run eslint
