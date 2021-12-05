@@ -25,6 +25,5 @@ yarn-error.log*
 yarn.lock*
 
 .idea
-/public/meta.json
+
 .env
-.env.*
