@@ -12,3 +12,8 @@ export const AUTH_CLIENT_DOMAIN =
 export const EIGHTBASE_WS_ENDPOINT = 'wss://ws.8base.com';
 export const AUTH_CLIENT_REDIRECT_URI = `${window.location.origin}/auth/callback`;
 export const AUTH_CLIENT_REDIRECT_LOGOUT = `${window.location.origin}/logout`;
+export const AUTH0_CONNECTION_NAME =
+  process.env.REACT_APP_AUTH0_CONNECTION_NAME || '';
+export const COMMINT_HASH = process.env.COMMINT_HASH || '';
+export const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
+export const FIELDWORKER_TOKEN = process.env.FIELDWORKER_TOKEN || '';

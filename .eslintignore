@@ -4,3 +4,9 @@ build
 public
 jest.config.ts
 *-test.*
+config
+# src/shared/types/generated.ts
+# src/shared/types/types.ts
+# src/shared/types/operations.ts
+# src/shared/types/apollo-helpers.ts
+craco.config.js

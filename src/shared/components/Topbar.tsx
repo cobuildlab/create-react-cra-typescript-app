@@ -1,95 +1,114 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
-  createStyles,
-  IconButton,
-  makeStyles,
-  Menu,
-  MenuItem,
-  Theme,
   Toolbar,
+  Divider,
+  IconButton,
   Typography,
-} from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import { useAuth0 } from '@auth0/auth0-react';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }),
-);
+} from '@mui/material';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useHistory, useLocation } from 'react-router-dom';
+import { SidebarMobile } from './Sidebar';
+import { ROUTES } from '../../routes/routes-model';
 
 /**
  * @returns Component.
  */
 export const Topbar: React.FC = () => {
-  const classes = useStyles();
-  const { logout } = useAuth0();
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const history = useHistory();
+  const location = useLocation();
+  const [open, setOpen] = useState<boolean>(false);
 
   /**
-   * @param event - Event.
+   * @returns NavBarTitle.
    */
-  const handleMenu = (event: React.MouseEvent<HTMLElement>): void => {
-    setAnchorEl(event.currentTarget);
+  const getTitle = (): string => {
+    const title = Object.values(ROUTES).find(
+      (i) => i.path.slice(0, 3) === location.pathname.slice(0, 3),
+    );
+    if (title) {
+      return title.text;
+    }
+    return '404';
   };
-
-  /**
-   *
-   */
-  const handleClose = (): void => {
-    setAnchorEl(null);
-  };
-
-  /**
-   * @returns Void.
-   */
-  const handleLogout = (): void =>
-    logout({
-      returnTo: window.location.origin,
-    });
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar>
-        <Typography variant="h6" noWrap className={classes.title}>
-          React App
-        </Typography>
-        <div>
+    <>
+      <AppBar
+        position="fixed"
+        sx={{
+          gridArea: 'topbar',
+          position: 'initial',
+          background: '#fff',
+          boxShadow: 'none',
+          display: 'flex',
+          justifyContent: ['space-between', 'flex-end'],
+          flexDirection: 'row',
+          padding: '10px 0',
+          color: 'icons.main',
+        }}
+      >
+        <Toolbar
+          sx={{
+            display: ['none', 'flex'],
+            maxHeight: '100%',
+            background: '#fff',
+            minHeight: {
+              xs: 'auto', // theme.breakpoints.up('xs')
+            },
+            '&>*': {
+              margin: '0 5px',
+            },
+          }}
+        >
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit">
+            color="inherit"
+          >
             <AccountCircle />
           </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+          <Divider orientation="vertical" />
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={() => history.push('/logout')}
+            color="inherit"
+          >
+            <ExitToAppOutlinedIcon />
+          </IconButton>
+        </Toolbar>
+        <Toolbar
+          sx={{
+            maxHeight: '100%',
+            background: '#fff',
+            display: ['flex', 'none'],
+            minHeight: {
+              xs: 'auto', // theme.breakpoints.up('xs')
+            },
+          }}
+        >
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={() => {
+              setOpen(true);
             }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleClose}>
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </Menu>
-        </div>
-      </Toolbar>
-    </AppBar>
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography color="primary" variant="h6">
+            {getTitle()}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <SidebarMobile open={open} close={() => setOpen(false)} />
+    </>
   );
 };

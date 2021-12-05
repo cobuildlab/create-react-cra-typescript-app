@@ -36,7 +36,10 @@ export function Auth0ProviderWithHistory({
       domain={AUTH_CLIENT_DOMAIN}
       clientId={AUTH_CLIENT_ID}
       redirectUri={AUTH_CLIENT_REDIRECT_URI}
-      onRedirectCallback={onRedirectCallback}>
+      onRedirectCallback={onRedirectCallback}
+      useRefreshTokens
+      cacheLocation="localstorage"
+    >
       {children}
     </Auth0Provider>
   );

@@ -13,8 +13,8 @@ import {
   EIGHTBASE_WS_ENDPOINT,
   WORKSPACE_ID,
   ENVIRONMENT_NAME,
-} from './constants';
-import { OnTokenEvent } from '../modules/auth/auth-events';
+} from '../constants';
+import { tokenStore } from '../../modules/auth/auth-events';
 
 /**
  * @param {Function} getToken - Function to get the token.
@@ -95,4 +95,4 @@ export function createApolloClient(
 }
 
 export const apolloClient: ApolloClient<NormalizedCacheObject> =
-  createApolloClient(() => OnTokenEvent.get()?.token as string);
+  createApolloClient(() => tokenStore.get().token ?? '');
