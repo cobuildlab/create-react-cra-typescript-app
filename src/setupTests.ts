@@ -8,16 +8,24 @@ import fetchMock from 'jest-fetch-mock';
 
 fetchMock.enableMocks();
 
-window.matchMedia =
-  window.matchMedia ||
-  (() => ({
-    matches: false,
-    addListener() {},
-    removeListener() {},
-  }));
+if (typeof window !== 'undefined') {
+  window.matchMedia =
+    window.matchMedia ||
+    (() => ({
+      matches: false,
+      /**
+       *
+       */
+      addListener() {},
+      /**
+       *
+       */
+      removeListener() {},
+    }));
 
-window.requestAnimationFrame =
-  window.requestAnimationFrame ||
-  ((callback) => {
-    setTimeout(callback, 0);
-  });
+  window.requestAnimationFrame =
+    window.requestAnimationFrame ||
+    ((callback) => {
+      setTimeout(callback, 0);
+    });
+}
