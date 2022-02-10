@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Routes as RoutesComponent, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import { Auth } from './modules/auth/Auth';
 import { AuthCallback } from './modules/auth/components/AuthCallback';
@@ -15,22 +15,22 @@ import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistor
  */
 export const Routes: React.FC = () => (
   <>
-    <Switch>
-      <Route exact path="/auth" component={Auth} />
-      <Route exact path="/auth/callback" component={AuthCallback} />
-      <Route path="/logout" component={Logout} />
+    <RoutesComponent>
+      <Route path="/auth" element={Auth} />
+      <Route path="/auth/callback" element={AuthCallback} />
+      <Route path="/logout" element={Logout} />
       <Layout>
-        <Route path="/dashboard" component={Dashboard} exact />
+        <Route path="/dashboard" element={Dashboard} />
       </Layout>
       <Auth0ProviderWithHistory>
         <ApolloProvider client={client}>
           <Session>
             <Layout>
-              <Route path="/dashboard-in-session" component={Dashboard} exact />
+              <Route path="/dashboard-in-session" element={Dashboard} />
             </Layout>
           </Session>
         </ApolloProvider>
       </Auth0ProviderWithHistory>
-    </Switch>
+    </RoutesComponent>
   </>
 );

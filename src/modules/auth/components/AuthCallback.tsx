@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSetupAuth0Token } from '../auth-hooks';
 import { handleAuthentication } from '../auth-actions';
+import { useNavigate } from 'react-router-dom';
 
 // TODO add loading component
 /**
- * @param {object} props - Props.
- * @param {object} props.history - History of rect router.
  * @returns {JSX.Element} - Auth callback component.
  */
-export function AuthCallback({ history }: RouteComponentProps): JSX.Element {
+export function AuthCallback(): JSX.Element {
   const { user, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
 
   useSetupAuth0Token();
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push('/');
+      navigate('/');
       if (user && user.email) handleAuthentication(user.email);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

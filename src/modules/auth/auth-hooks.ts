@@ -1,7 +1,7 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useState } from 'react';
 import { createAction } from '@cobuildlab/react-simple-state/lib/actions';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { OnTokenErrorEvent, OnTokenEvent } from './auth-events';
 import { FETCH_SESSION_QUERY } from './auth-queries';
@@ -44,12 +44,13 @@ export function useSetupAuth0Token(): boolean {
  */
 export function useDefaultRedirect(route: string): void {
   const auth = useAuth0();
-  const history = useHistory();
+  const navegate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
-    if (auth.isAuthenticated && history.location.pathname === '/') {
-      history.push(route);
+    if (auth.isAuthenticated && location.pathname === '/') {
+      navegate(route);
     }
-  }, [history, auth.isAuthenticated, route]);
+  }, [navegate, auth.isAuthenticated, route, location.pathname]);
 
   // TODO: hanlde the error case when fetching the token
 }
