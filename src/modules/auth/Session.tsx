@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { useNavigate, Route } from 'react-router-dom';
 import { MainLoader } from '../../shared/components/MainLoader';
 import {
   useDefaultRedirect,
@@ -19,21 +19,25 @@ type SessionProps = {
  */
 export function Session({ children }: SessionProps): JSX.Element {
   const { isAuthenticated } = useAuth0();
-  const location = useLocation();
   const loadingToken = useSetupAuth0Token();
   useDefaultRedirect('/dashboard');
 
   const session = useSession();
+  /**
+   * @param {object} props - Props.
+   * @param {string} props.to - Path.
+   * @returns {null} - Nothing.
+   */
+  const Redirect = ({ to }: { to: string }): null => {
+    const navigate = useNavigate();
+    useEffect(() => {
+      navigate(to);
+    });
+    return null;
+  };
 
   if (!isAuthenticated)
-    return (
-      <Redirect
-        to={{
-          pathname: '/auth',
-          state: { from: location.pathname },
-        }}
-      />
-    );
+    return <Route path="/" element={<Redirect to="/auth" />} />;
 
   if (session?.error) console.log('Session Error:', session.error);
 
