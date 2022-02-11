@@ -1,9 +1,9 @@
 import React from 'react';
 import TestRenderer, { ReactTestRendererJSON } from 'react-test-renderer';
-import { MockedProvider } from '@apollo/client/testing';
+import { MockedProvider, MockedResponse } from '@apollo/client/testing';
 import { Sidebar } from '../../../shared/components/Sidebar';
 
-const mocks: any[] = []; // We'll fill this in next
+const mocks: ReadonlyArray<MockedResponse> = []; // We'll fill this in next
 
 it('renders without error', () => {
   const node = (

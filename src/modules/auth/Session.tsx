@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useNavigate, Route } from 'react-router-dom';
+import { useNavigate, Route, Routes } from 'react-router-dom';
 import { MainLoader } from '../../shared/components/MainLoader';
 import {
   useDefaultRedirect,
@@ -37,7 +37,11 @@ export function Session({ children }: SessionProps): JSX.Element {
   };
 
   if (!isAuthenticated)
-    return <Route path="/" element={<Redirect to="/auth" />} />;
+    return (
+      <Routes>
+        <Route path="/" element={<Redirect to="/auth" />} />
+      </Routes>
+    );
 
   if (session?.error) console.log('Session Error:', session.error);
 

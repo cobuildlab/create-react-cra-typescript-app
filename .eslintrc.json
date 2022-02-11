@@ -36,6 +36,13 @@
   "settings": {
     "jsdoc": {
       "mode": "typescript"
+    },
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "fragment": "Fragment",
+      "version": "detect",
+      "flowVersion": "0.53"
     }
   },
   "rules": {
@@ -48,11 +55,17 @@
     "no-restricted-imports": [
       "error",
       {
-        "patterns": ["@material-ui/*/*/*", "!@material-ui/core/test-utils/*"]
+        "patterns": [
+          "@material-ui/*/*/*",
+          "!@material-ui/core/test-utils/*"
+        ]
       }
     ],
     "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/quotes": ["error", "single"],
+    "@typescript-eslint/quotes": [
+      "error",
+      "single"
+    ],
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
@@ -107,15 +120,22 @@
     "jsdoc/require-returns-description": "error",
     "jsdoc/require-returns-type": "off",
     "jsdoc/valid-types": "error",
-    "semi": ["error", "always"],
+    "semi": [
+      "error",
+      "always"
+    ],
     "no-console": [
       "error",
       {
-        "allow": ["warn", "error", "log"]
+        "allow": [
+          "warn",
+          "error",
+          "log"
+        ]
       }
     ],
     "no-unused-vars": [
-      "error",
+      "warn",
       {
         "vars": "all",
         "args": "none",
@@ -137,7 +157,10 @@
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [".ts", ".tsx"]
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
       }
     ]
   }
