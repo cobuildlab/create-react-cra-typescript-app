@@ -8,7 +8,7 @@ import { Dashboard } from './modules/dashboard/components/DashboradView';
 import { Session } from './modules/auth/Session';
 import { apolloClient as client } from './shared/apollo';
 import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
-import { Layout } from './shared/components/Layout';
+import { Layout } from './shared/components/Layout/Layout';
 
 /**
  * @returns Routes.
@@ -17,6 +17,13 @@ export const Routes: React.FC = () => (
   <>
     <Auth0ProviderWithHistory>
       <ApolloProvider client={client}>
+        {/* PUBLIC ROUTES */}
+        <RoutesComponent>
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+        </RoutesComponent>
+
+        {/* SESSION ROUTES */}
         <Session>
           <RoutesComponent>
             <Route
@@ -27,8 +34,6 @@ export const Routes: React.FC = () => (
                 </Layout>
               }
             />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/logout" element={<Logout />} />
             <Route
               path="/dashboard"

@@ -74,6 +74,7 @@ export function createApolloClient(
       }
     },
   });
+
   const splitLink = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
@@ -91,6 +92,7 @@ export function createApolloClient(
     link: authLink.concat(splitLink),
     cache: new InMemoryCache(),
   });
+
   return client;
 }
 
