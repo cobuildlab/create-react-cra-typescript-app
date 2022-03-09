@@ -15,9 +15,8 @@ export function AuthCallback(): JSX.Element {
   useSetupAuth0Token();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
-      if (user && user.email) handleAuthentication(user.email);
+    if (isAuthenticated && user && user.email) {
+      handleAuthentication(user.email).finally(() => navigate('/'));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);

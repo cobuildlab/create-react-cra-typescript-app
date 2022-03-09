@@ -1,11 +1,7 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Route, Routes } from 'react-router-dom';
 import { MainLoader } from '../../shared/components/progress/MainLoader';
-import {
-  // useDefaultRedirect,
-  useSetupAuth0Token,
-} from './auth-hooks';
+import { useSetupAuth0Token } from './auth-hooks';
 import { Redirect } from '../../shared/components/Redirect';
 
 /**
@@ -31,13 +27,7 @@ type SessionProps = {
 export function Session({ children }: SessionProps): JSX.Element {
   const { isAuthenticated, isLoading } = useAuth0();
   // useDefaultRedirect('/dashboard');
-
-  if (!isAuthenticated)
-    return (
-      <Routes>
-        <Route path="/" element={<Redirect to="/auth" />} />
-      </Routes>
-    );
+  if (!isAuthenticated) return <Redirect to="/auth" />;
 
   if (isLoading) return <MainLoader />;
 
