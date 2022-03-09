@@ -20,21 +20,6 @@ const routes = [
     icon: <HomeIcon />,
     path: '/home',
   },
-  {
-    name: 'Customers',
-    icon: <HomeIcon />,
-    path: '/customers',
-  },
-  {
-    name: 'Invoices',
-    icon: <HomeIcon />,
-    path: '/invoices',
-  },
-  {
-    name: 'new user',
-    icon: <HomeIcon />,
-    path: '/new-user',
-  },
 ];
 
 const useStyles = makeStyles<Theme, StylesProps>((theme) =>
