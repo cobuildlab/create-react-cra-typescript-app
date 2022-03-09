@@ -7,7 +7,7 @@ import { Box } from '@mui/system';
 import HomeIcon from '@mui/icons-material/Home';
 import { createStyles, makeStyles } from '@mui/styles';
 import { useLocation, useNavigate } from 'react-router-dom';
-import MainLogo from '../../assets/images/mainLogo.png';
+import logo from '../../assets/images/main.png';
 import { PRIMARY } from '../../css/theme';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -131,7 +131,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, drawerWidth }) => {
         <Box display="flex" flexDirection="column" alignItems="center">
           <img
             style={{ width: '70px', margin: '5px', borderRadius: '6px' }}
-            src={MainLogo}
+            src={logo}
             alt="shawcor-logo"
           />
           <Box className={classes.divider} marginTop={2} marginBottom={2} />
