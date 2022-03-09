@@ -8,7 +8,7 @@ const mocks: ReadonlyArray<MockedResponse> = []; // We'll fill this in next
 it('renders without error', () => {
   const node = (
     <MockedProvider mocks={mocks} addTypename={false}>
-      <Sidebar />
+      <Sidebar open={true} drawerWidth={38} />
     </MockedProvider>
   );
 

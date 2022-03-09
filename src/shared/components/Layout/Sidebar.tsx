@@ -1,63 +1,167 @@
-import React from 'react';
-import {
-  createStyles,
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-  Toolbar,
-} from '@material-ui/core';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as React from 'react';
+import clsx from 'clsx';
+import { Theme, Drawer } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import { Box } from '@mui/system';
+import HomeIcon from '@mui/icons-material/Home';
+import { createStyles, makeStyles } from '@mui/styles';
+import { useLocation, useNavigate } from 'react-router-dom';
+import mainLogo from '../../assets/images/mainLogo.png';
+import { PRIMARY } from '../../css/theme';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-const drawerWidth = 240;
+interface StylesProps {
+  drawerWidth: number;
+}
 
-const useStyles = makeStyles(() =>
+const routes = [
+  {
+    name: 'Home',
+    icon: <HomeIcon />,
+    path: '/home',
+  },
+  {
+    name: 'Customers',
+    icon: <HomeIcon />,
+    path: '/customers',
+  },
+  {
+    name: 'Invoices',
+    icon: <HomeIcon />,
+    path: '/invoices',
+  },
+  {
+    name: 'new user',
+    icon: <HomeIcon />,
+    path: '/new-user',
+  },
+];
+
+const useStyles = makeStyles<Theme, StylesProps>((theme) =>
   createStyles({
     drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
+      [theme.breakpoints?.up('sm')]: {
+        /**
+         *
+         * @param {object} props - Styles Props.
+         * @param {boolean} props.drawerWidth - Drawer Width.
+         * @returns {number} - Drawer Width.
+         */
+        width: (props) => props.drawerWidth,
+        flexShrink: 0,
+      },
     },
     drawerPaper: {
-      width: drawerWidth,
+      /**
+       *
+       * @param {object} props - Styles Props.
+       * @param {boolean} props.drawerWidth - Drawer Width.
+       * @returns {number} - Drawer Width.
+       */
+      width: (props) => props.drawerWidth,
+      backgroundColor: PRIMARY,
+      padding: '28px 2px',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
-    drawerContainer: {
-      overflow: 'auto',
+    divider: {
+      width: '100%',
+      backgroundColor: '#fff',
+      height: 1,
+    },
+    buttonWhite: {
+      color: '#fff',
+      opacity: 0.5,
+      '&:hover': {
+        opacity: 1,
+      },
+    },
+    iconButton: {
+      width: 70,
+      height: 56,
+      color: '#fff',
+      opacity: 0.5,
+      borderRadius: 8,
+      marginBottom: '4px',
+      '&:hover': {
+        opacity: 1,
+      },
+    },
+    buttonActive: {
+      opacity: 1,
+      backgroundColor: '#8C8C8C',
+      '&:hover': {
+        backgroundColor: '#8C8C8C',
+      },
+    },
+    noMargin: {
+      margin: 0,
     },
   }),
 );
 
+interface SidebarProps {
+  open: boolean;
+  drawerWidth: number;
+}
+
 /**
+ * @param {object} props - Sidebar Props.
+ * @param {boolean} props.open - Open Boolean.
+ * @param {number} props.drawerWidth - Drawer Width.
  * @returns Component.
  */
-export const Sidebar: React.FC = () => {
-  const classes = useStyles();
+export const Sidebar: React.FC<SidebarProps> = ({ open, drawerWidth }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const classes = useStyles({ drawerWidth });
 
   return (
     <Drawer
       className={classes.drawer}
-      variant="permanent"
       classes={{
         paper: classes.drawerPaper,
       }}
+      variant="persistent"
+      anchor="left"
+      open={open}
     >
-      <Toolbar />
-      <div className={classes.drawerContainer}>
-        <List>
-          {['Item 1', 'Item 2', 'Item 3', 'Item 4'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </div>
+      <Box width="100%">
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <img
+            style={{ width: '70px', margin: '5px', borderRadius: '6px' }}
+            src={mainLogo}
+            alt="shawcor-logo"
+          />
+          <Box className={classes.divider} marginTop={2} marginBottom={2} />
+
+          {routes.map((route) => {
+            return (
+              <IconButton
+                onClick={() => navigate(route.path)}
+                key={route.name}
+                className={clsx(classes.iconButton, {
+                  [classes.buttonActive]: location.pathname.startsWith(
+                    route.path,
+                  ),
+                })}
+              >
+                {route.icon}
+              </IconButton>
+            );
+          })}
+        </Box>
+      </Box>
+
+      <Box width="100%">
+        <Box display="flex" flexDirection="column" alignItems="center">
+          <Box className={classes.divider} marginBottom={2} />
+          <IconButton className={clsx([classes.iconButton, classes.noMargin])}>
+            <SettingsIcon />
+          </IconButton>
+        </Box>
+      </Box>
     </Drawer>
   );
 };
