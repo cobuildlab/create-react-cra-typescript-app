@@ -4,12 +4,12 @@ import { ApolloProvider } from '@apollo/client';
 import { Auth } from './modules/auth/Auth';
 import { AuthCallback } from './modules/auth/components/AuthCallback';
 import { Logout } from './modules/auth/Logout';
-import { Dashboard } from './modules/dashboard/components/DashboradView';
 import { Session } from './modules/auth/Session';
 import { apolloClient as client } from './shared/apollo';
 import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
 import { Layout } from './shared/components/Layout/Layout';
 import { Redirect } from './shared/components/Redirect';
+import { Dashboard } from './modules/dashboard/DashboardView';
 
 /**
  * @returns Routes.
