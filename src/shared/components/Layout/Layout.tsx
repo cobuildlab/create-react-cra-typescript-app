@@ -13,7 +13,7 @@ const useStyles = makeStyles(() =>
       height: '100%',
     },
     content: {
-      backgroundColor: '#E5E5E5',
+      backgroundColor: '#F0F0F0',
       flexGrow: 1,
       /* transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
@@ -35,6 +35,7 @@ const useStyles = makeStyles(() =>
     children: {
       marginTop: '64px',
       marginLeft: '88px',
+      padding: '40px',
     },
   }),
 );

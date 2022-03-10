@@ -149,7 +149,7 @@
     "react/no-unused-prop-types": "error",
     "react/jsx-props-no-spreading": "off",
     "react/require-default-props": [
-      "error",
+      "off",
       {
         "forbidDefaultForRequired": true
       }
