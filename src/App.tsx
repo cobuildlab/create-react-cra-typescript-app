@@ -1,6 +1,8 @@
+import { ThemeProvider } from '@mui/styles';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from './routes';
+import { theme } from './shared/css/theme';
 
 /**
  * @returns {JSX.Element} - Main app component.
@@ -8,7 +10,9 @@ import { Routes } from './routes';
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <Routes />
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
