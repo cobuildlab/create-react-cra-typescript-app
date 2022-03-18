@@ -238,12 +238,12 @@ export const theme = createTheme(
       },
       MuiButton: {
         defaultProps: {
-          size: 'large',
           disableElevation: true,
           color: 'primary',
           variant: 'contained',
           style: {
             textTransform: 'none',
+            background: PRIMARY,
           },
         },
         styleOverrides: {
