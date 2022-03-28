@@ -3,8 +3,21 @@ import DateRangePicker, { DateRange } from '@mui/lab/DateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import PopupState, { bindPopover, bindTrigger } from 'material-ui-popup-state';
-import { Button, Grid, IconButton, Popover, TextField } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  MenuItem,
+  Popover,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+} from '@mui/material';
 import AddRoadIcon from '@mui/icons-material/AddRoad';
+import { CustomInput } from './inputs/CustomInput';
 
 // For filter menu
 export interface FilterValuesProps {
@@ -45,6 +58,15 @@ export const FilterMenu: React.FC<FilterMenuProps> = (props) => {
           >
             <Grid container spacing={2} sx={{ p: 2, width: 300 }}>
               <Grid item xs={12}>
+                <Typography
+                  style={{
+                    color: '#8392AB',
+                    marginLeft: '5px',
+                    marginBottom: '15px',
+                  }}
+                >
+                  Date
+                </Typography>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DateRangePicker
                     open={open}
@@ -76,10 +98,52 @@ export const FilterMenu: React.FC<FilterMenuProps> = (props) => {
                   />
                 </LocalizationProvider>
               </Grid>
+              <Grid item xs={12}>
+                <Typography style={{ color: '#8392AB', marginLeft: '5px' }}>
+                  Dropdown
+                </Typography>
+                <CustomInput
+                  style={{ width: '80%', marginLeft: '5px' }}
+                  select
+                  fullWidth
+                >
+                  <MenuItem>Select ...</MenuItem>
+                </CustomInput>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Typography style={{ color: '#8392AB', marginLeft: '5px' }}>
+                  Gender
+                </Typography>
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                    <FormControlLabel
+                      value="other"
+                      control={<Radio />}
+                      label="Other"
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+
               <Grid container item xs={12}>
                 <Grid item xs style={{ marginRight: 5 }}>
                   <Button
-                    variant="default"
+                    variant="text"
                     onClick={() => {
                       setValue([null, null]);
                       popupState.close();

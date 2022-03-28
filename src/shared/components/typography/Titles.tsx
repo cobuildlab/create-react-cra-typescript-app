@@ -5,8 +5,9 @@ const MuiTitle = withStyles(() =>
   createStyles({
     root: {
       fontSize: '18px',
-      color: '#005A42',
+      color: '#425466',
       fontWeight: 'bold',
+      textAlign: 'left',
     },
   }),
 )(Typography);
