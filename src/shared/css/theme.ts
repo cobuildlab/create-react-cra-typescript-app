@@ -243,7 +243,6 @@ export const theme = createTheme(
           variant: 'contained',
           style: {
             textTransform: 'none',
-            background: PRIMARY,
           },
         },
         styleOverrides: {

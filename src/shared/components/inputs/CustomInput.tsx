@@ -7,11 +7,11 @@ const TextField = withStyles(() =>
     root: {
       '& .MuiInputBase-root': {
         background: '#fff',
-        color: '#181518',
+        color: '#8C8C8C',
         '& fieldset': {
-          border: '3px solid #CCCCCC',
-          boxSizing: 'borderbox',
-          borderRadius: '12px',
+          boxShadow:
+            '0px 1px 2px rgba(50, 50, 71, 0.2), 0px 0px 1px rgba(50, 50, 71, 0.2)',
+          borderRadius: '6px',
         },
         '& .MuiInputAdornment-root': {
           color: '#CCCCCC',
@@ -20,6 +20,11 @@ const TextField = withStyles(() =>
       '&:focus': {
         '& .MuiInputBase-root fieldset': {
           border: '3px solid #5BC2BA',
+        },
+      },
+      '&:hover': {
+        '& .MuiInputBase-root fieldset': {
+          border: '2px solid #5BC2BA',
         },
       },
       /* '& label.Mui-focused': {
