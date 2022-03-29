@@ -5,13 +5,13 @@ import {
   InputAdornment,
   MenuItem,
   StandardTextFieldProps,
-  TextField,
   Toolbar,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 import * as React from 'react';
 import { useDelay } from '../../hooks/delay';
+import { CustomInput } from '../inputs/CustomInput';
 
 export type DefaultRowSize = 10 | 20 | 50;
 
@@ -33,13 +33,13 @@ export const RowSelector: React.FC<StandardTextFieldProps> = (props) => {
 
   return (
     <FormControl variant="outlined" fullWidth>
-      <TextField select label="Rows" {...props}>
+      <CustomInput select label="Rows" {...props}>
         {options.map((option) => (
           <MenuItem key={option.label} value={option.value}>
             {option.label}
           </MenuItem>
         ))}
-      </TextField>
+      </CustomInput>
     </FormControl>
   );
 };
@@ -50,7 +50,7 @@ export const RowSelector: React.FC<StandardTextFieldProps> = (props) => {
  */
 export const SearchInput: React.FC<StandardTextFieldProps> = (props) => (
   <FormControl variant="outlined" fullWidth>
-    <TextField
+    <CustomInput
       InputProps={{
         endAdornment: (
           <InputAdornment position="start">
@@ -93,9 +93,6 @@ export const TableToolbar: React.FC<TableToolbarProps> = (props) => {
           alignContent="center"
           spacing={3}
         >
-          {
-            // Search component.
-          }
           <Grid item xs={12} sm={6} lg={3}>
             <SearchInput
               onChange={(e) => {

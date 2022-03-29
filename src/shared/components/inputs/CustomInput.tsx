@@ -8,6 +8,7 @@ const TextField = withStyles(() =>
       '& .MuiInputBase-root': {
         background: '#fff',
         color: '#8C8C8C',
+        padding: '5px',
         '& fieldset': {
           boxShadow:
             '0px 1px 2px rgba(50, 50, 71, 0.2), 0px 0px 1px rgba(50, 50, 71, 0.2)',
@@ -30,7 +31,6 @@ const TextField = withStyles(() =>
       /* '& label.Mui-focused': {
         color: 'white',
       }, */
-      margin: '20px 10px',
     },
   }),
 )(MuiTexfield);

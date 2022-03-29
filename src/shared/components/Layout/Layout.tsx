@@ -34,8 +34,8 @@ const useStyles = makeStyles(() =>
     },
     children: {
       marginTop: '64px',
-      marginLeft: '88px',
-      padding: '40px',
+      /* marginLeft: '88px',
+      padding: '40px', */
     },
   }),
 );
