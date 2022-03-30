@@ -28,7 +28,11 @@ interface FilterMenuProps {
   onCancel: () => void;
   onApply: (filter: FilterValuesProps) => void;
 }
-
+const colorRadio = {
+  '&': {
+    color: '#32324733',
+  },
+};
 /**
  * @param {FilterMenuProps} props - Properties.
  * @returns {JSX.Element} - Filter Menu.
@@ -123,17 +127,17 @@ export const FilterMenu: React.FC<FilterMenuProps> = (props) => {
                   >
                     <FormControlLabel
                       value="female"
-                      control={<Radio />}
+                      control={<Radio sx={colorRadio} />}
                       label="Female"
                     />
                     <FormControlLabel
                       value="male"
-                      control={<Radio />}
+                      control={<Radio sx={colorRadio} />}
                       label="Male"
                     />
                     <FormControlLabel
                       value="other"
-                      control={<Radio />}
+                      control={<Radio sx={colorRadio} />}
                       label="Other"
                     />
                   </RadioGroup>
