@@ -25,7 +25,9 @@ type SessionProps = {
  * @returns {JSX.Element} - Session component.
  */
 export function Session({ children }: SessionProps): JSX.Element {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, error } = useAuth0();
+  console.log('Session isAuthenticated', isAuthenticated, isLoading, error);
+
   // useDefaultRedirect('/dashboard');
   if (!isAuthenticated) return <Redirect to="/auth" />;
 

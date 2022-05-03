@@ -9,9 +9,12 @@ import { useNavigate } from 'react-router-dom';
  * @returns {JSX.Element} - Auth callback component.
  */
 export function AuthCallback(): JSX.Element {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, isLoading, error } = useAuth0();
   const navigate = useNavigate();
-
+  console.log('AuthCallback user', user);
+  console.log('AuthCallback isAuthenticated', isAuthenticated);
+  console.log('AuthCallback isLoading', isLoading);
+  console.log('AuthCallback error', error);
   useSetupAuth0Token();
 
   useEffect(() => {
