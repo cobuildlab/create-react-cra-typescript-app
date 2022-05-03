@@ -18,6 +18,7 @@ import { createStyles, makeStyles } from '@mui/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface StylesProps {
   drawerWidth: number;
@@ -92,6 +93,10 @@ interface TopbarProps {
  */
 export const Topbar: React.FC<TopbarProps> = ({ drawerWidth, sidebarOpen }) => {
   const classes = useStyles({ drawerWidth });
+  const { user, isAuthenticated, logout } = useAuth0();
+  console.log('user', user);
+  console.log('isAuthenticated', isAuthenticated);
+
   const [menuAnchorEl, setMenuAnchorEl] = React.useState<null | HTMLElement>(
     null,
   );
@@ -111,6 +116,12 @@ export const Topbar: React.FC<TopbarProps> = ({ drawerWidth, sidebarOpen }) => {
     setMenuAnchorEl(null);
   };
 
+  /**
+   * @returns {void}
+   */
+  const handleLogout = (): void => {
+    logout({ returnTo: window.location.origin });
+  };
   return (
     <AppBar
       position="fixed"
@@ -185,6 +196,7 @@ export const Topbar: React.FC<TopbarProps> = ({ drawerWidth, sidebarOpen }) => {
                     onClose={handleCloseMenu}
                   >
                     <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
+                    <MenuItem onClick={handleLogout}>Log out</MenuItem>
                   </Menu>
                 </Grid>
               </Grid>
