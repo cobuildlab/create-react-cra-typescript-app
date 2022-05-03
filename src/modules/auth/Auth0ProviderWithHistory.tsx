@@ -30,7 +30,11 @@ export function Auth0ProviderWithHistory({
   const onRedirectCallback = (appState: AppState): void => {
     navigate(appState?.returnTo || window.location.pathname);
   };
-
+  console.log('ENV vars', {
+    AUTH_CLIENT_ID: AUTH_CLIENT_ID,
+    AUTH_CLIENT_DOMAIN: AUTH_CLIENT_DOMAIN,
+    AUTH_CLIENT_REDIRECT_URI: AUTH_CLIENT_REDIRECT_URI,
+  });
   return (
     <Auth0Provider
       domain={AUTH_CLIENT_DOMAIN}
