@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { MainLoader } from '../../shared/components/progress/MainLoader';
 
-// TODO add loading component
+import { Loader } from '../../shared/components/ui/Loader';
+
 /**
  * @returns {JSX.Element} - Auth component.
  */
-export function Auth(): JSX.Element {
+export function AuthView(): JSX.Element {
   const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
@@ -14,5 +14,5 @@ export function Auth(): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <MainLoader />;
+  return <Loader fullPage />;
 }

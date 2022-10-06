@@ -1,16 +1,8 @@
 import { createEvent } from '@cobuildlab/react-simple-state';
 
-export interface InitialStateType {
-  token: null | string;
-}
+import { AuthDataType } from './auth-types';
 
-const INITIAL_STATE = {
-  token: null,
-};
-
-export const OnTokenEvent = createEvent<InitialStateType>({
-  initialValue: INITIAL_STATE,
+export const OnTokenEvent = createEvent<AuthDataType>({
+  initialValue: { token: null },
 });
 export const OnTokenErrorEvent = createEvent<Error>();
-
-export const OnFetchSessionError = createEvent();

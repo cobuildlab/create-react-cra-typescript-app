@@ -5,7 +5,7 @@ import {
   AUTH_CLIENT_ID,
   AUTH_CLIENT_DOMAIN,
   AUTH_CLIENT_REDIRECT_URI,
-} from '../../shared/constants';
+} from '../constants';
 
 export type AppState = {
   returnTo?: string;
@@ -27,7 +27,7 @@ export function Auth0ProviderWithHistory({
   /**
    * @param appState - State of the app.
    */
-  const onRedirectCallback = (appState: AppState): void => {
+  const onRedirectCallback = (appState: AppState | undefined): void => {
     navigate(appState?.returnTo || window.location.pathname);
   };
 

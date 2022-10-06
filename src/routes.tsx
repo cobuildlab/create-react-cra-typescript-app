@@ -1,48 +1,43 @@
-import React from 'react';
-import { Routes as RoutesComponent, Route } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/client';
-import { Auth } from './modules/auth/Auth';
+import { withAuthenticationRequired } from '@auth0/auth0-react';
+import { FC, lazy, Suspense } from 'react';
+import { Route, Routes as RouterRoutes } from 'react-router-dom';
+
+import { AuthView } from './modules/auth/AuthView';
 import { AuthCallback } from './modules/auth/components/AuthCallback';
-import { Logout } from './modules/auth/Logout';
-import { Session } from './modules/auth/Session';
-import { apolloClient as client } from './shared/apollo';
-import { Auth0ProviderWithHistory } from './modules/auth/Auth0ProviderWithHistory';
-import { Layout } from './shared/components/Layout/Layout';
-import { Redirect } from './shared/components/Redirect';
-import { Dashboard } from './modules/dashboard/DashboardView';
+import { Logout } from './modules/auth/components/Logout';
+import { ROUTES } from './shared/constants';
+import { Loader } from './shared/components/ui/Loader';
+
+export const DashboardLazyView = withAuthenticationRequired(
+  lazy(() =>
+    import('./modules/dashboard/DashboardView').then((module) => ({
+      default: module.DashboardView,
+    }))
+  )
+);
+
+export const HomeLazyView = lazy(() =>
+  import('./modules/home/HomeView').then((module) => ({
+    default: module.HomeView,
+  }))
+);
 
 /**
  * @returns Routes.
  */
-export const Routes: React.FC = () => {
-  return (
-    <Auth0ProviderWithHistory>
-      <ApolloProvider client={client}>
-        <RoutesComponent>
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
-          <Route
-            path="*"
-            element={
-              <Session>
-                <RoutesComponent>
-                  <Route path="/logout" element={<Logout />} />
-                  <Route
-                    path="/dashboard"
-                    element={
-                      <Layout>
-                        <Dashboard />
-                      </Layout>
-                    }
-                  />
-                  <Route path="/home" element={<Layout>Home</Layout>} />
-                  <Route path="/" element={<Redirect to="/dashboard" />} />
-                </RoutesComponent>
-              </Session>
-            }
-          ></Route>
-        </RoutesComponent>
-      </ApolloProvider>
-    </Auth0ProviderWithHistory>
-  );
-};
+export const Routes: FC = () => (
+  <RouterRoutes>
+    <Route path={ROUTES.AUTH} element={<AuthView />} />
+    <Route path={ROUTES.AUTH_CALLBACK} element={<AuthCallback />} />
+    <Route path={ROUTES.LOGOUT} element={<Logout />} />
+    <Route path={ROUTES.HOME} element={<HomeLazyView />} />
+    <Route
+      path={ROUTES.DASHBOARD}
+      element={
+        <Suspense fallback={<Loader fullPage />}>
+          <DashboardLazyView />
+        </Suspense>
+      }
+    />
+  </RouterRoutes>
+);
