@@ -1,3 +1,17 @@
 import { createTheme } from '@mui/material/styles';
 
-export const theme = createTheme({});
+declare module '@mui/material/styles/createMixins' {
+  interface Mixins {
+    drawer: {
+      maxWidth: number;
+    };
+  }
+}
+
+export const theme = createTheme({
+  mixins: {
+    drawer: {
+      maxWidth: 240,
+    },
+  },
+});
