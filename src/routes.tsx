@@ -30,7 +30,14 @@ export const Routes: FC = () => (
     <Route path={ROUTES.AUTH} element={<AuthView />} />
     <Route path={ROUTES.AUTH_CALLBACK} element={<AuthCallback />} />
     <Route path={ROUTES.LOGOUT} element={<Logout />} />
-    <Route path={ROUTES.HOME} element={<HomeLazyView />} />
+    <Route
+      path={ROUTES.HOME}
+      element={
+        <Suspense fallback={<Loader fullPage />}>
+          <HomeLazyView />
+        </Suspense>
+      }
+    />
     <Route
       path={ROUTES.DASHBOARD}
       element={
