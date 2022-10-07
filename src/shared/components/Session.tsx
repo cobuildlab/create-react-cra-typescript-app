@@ -17,5 +17,9 @@ export function Session({ children }: SessionProps): ReactElement {
 
   if (session?.loading) return <Loader fullPage />;
 
+  // Problems with children type
+  // ReacxtNode or ReactElement
+  // One solution: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18051#issuecomment-449628575
+  // Other solution is change children type to ReactElement
   return children;
 }
