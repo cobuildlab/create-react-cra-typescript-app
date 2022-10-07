@@ -1,18 +1,18 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 import { Loader } from './ui/Loader';
 import { useSession } from '../../modules/auth/auth-hooks';
 
 type SessionProps = {
-  children: React.ReactElement;
+  children: ReactElement;
 };
 
 /**
- * @param {object} props - Props.
- * @param {JSX.Element}  props.children - Children.
- * @returns {JSX.Element} - Session component.
+ * @param {SessionProps} props - Props.
+ * @param {ReactElement}  props.children - Children.
+ * @returns {ReactElement} - Session component.
  */
-export function Session({ children }: SessionProps): JSX.Element {
+export function Session({ children }: SessionProps): ReactElement {
   const session = useSession();
 
   if (session?.loading) return <Loader fullPage />;
