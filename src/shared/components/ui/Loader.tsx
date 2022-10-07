@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box, BoxProps, CircularProgress } from '@mui/material';
 
 interface LoaderProps {
