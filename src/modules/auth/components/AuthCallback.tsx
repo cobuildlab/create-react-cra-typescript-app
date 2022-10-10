@@ -1,32 +1,32 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Loader } from '../../../shared/components/ui/Loader';
 import { ROUTES } from '../../../shared/constants';
 import { handleAuthentication } from '../auth-actions';
+import { useLocalStorage } from '../../../shared/hooks/storage';
+import { useAuth } from '../auth-hooks';
 
 /**
  * @returns {JSX.Element} - Auth callback component.
  */
 export function AuthCallback(): JSX.Element {
-  const { user, getIdTokenClaims, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
+  const { getToken } = useAuth();
+  const { init, setItem } = useLocalStorage();
   const location = useLocation();
   const { state } = location;
   const navigate = useNavigate();
 
-  const fetchToken = useCallback(async () => {
-    const token = await getIdTokenClaims();
-    // eslint-disable-next-line no-underscore-dangle
-    const tokenRaw: string | undefined = token?.__raw;
-    return tokenRaw || null;
-  }, [getIdTokenClaims]);
-
   useEffect(() => {
     if (isAuthenticated) {
-      fetchToken().then((token) => {
+      // init local storage
+      init();
+
+      getToken().then((token) => {
         if (token && user) {
-          localStorage.setItem('token', token);
+          setItem('token', token);
 
           handleAuthentication(user.email as string).finally(() =>
             navigate(state.returnTo || ROUTES.DASHBOARD)
@@ -36,7 +36,7 @@ export function AuthCallback(): JSX.Element {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchToken, isAuthenticated]);
+  }, [getToken, isAuthenticated]);
 
   return <Loader fullPage />;
 }

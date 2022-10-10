@@ -13,6 +13,7 @@ export const WORKSPACE_ENDPOINT = `https://api.8base.com/${WORKSPACE_ID}${
     ? ''
     : `_${ENVIRONMENT_NAME}`
 }`;
+export const PROJECT_ID = WORKSPACE_ID || '';
 
 export const ROUTES = {
   AUTH: '/auth',

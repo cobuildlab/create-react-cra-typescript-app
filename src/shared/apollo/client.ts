@@ -16,6 +16,7 @@ import {
   EIGHTBASE_WS_ENDPOINT,
   WORKSPACE_ID,
   ENVIRONMENT_NAME,
+  PROJECT_ID,
 } from '../constants';
 
 /**
@@ -34,9 +35,10 @@ export function createApolloClient(
   const httpLink = new HttpLink({
     uri: WORKSPACE_ENDPOINT,
   });
+  const prefix = PROJECT_ID;
 
   const authLink = setContext((_, { headers: _headers }) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(`${prefix}-token`);
 
     return {
       headers: {
@@ -56,7 +58,7 @@ export function createApolloClient(
        * @returns - Connection Params.
        */
       connectionParams: () => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem(`${prefix}-token`);
         return {
           token,
           environmentName,
@@ -86,7 +88,7 @@ export function createApolloClient(
   //      * @returns Websocket payload.
   //      */
   //     connectionParams: () => {
-  //       const token = localStorage.getItem('token');
+  //       const token = localStorage.getItem(`${prefix}-token`);
   //       return {
   //         token,
   //         environmentName,
