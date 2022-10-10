@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.0",
     "@auth0/auth0-react": "^1.11.0",
+    "@cobuildlab/error-handling": "^0.0.3",
     "@cobuildlab/react-simple-state": "^0.7.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
