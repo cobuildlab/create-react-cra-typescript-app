@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import {
   AUTH_CLIENT_ID,
@@ -21,13 +21,14 @@ export function Auth0ProviderWithHistory({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   /**
    * @param appState - State of the app.
    */
   const onRedirectCallback = (appState: AppState | undefined): void => {
-    navigate(appState?.returnTo || window.location.pathname);
+    console.log('appState:', appState);
+    // navigate(appState?.returnTo || window.location.pathname);
   };
 
   return (

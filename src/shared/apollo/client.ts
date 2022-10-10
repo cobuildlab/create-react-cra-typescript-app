@@ -5,10 +5,11 @@ import {
   HttpLink,
   split,
 } from '@apollo/client';
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+// import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { setContext } from '@apollo/client/link/context';
-import { createClient as createGraphqlWsClient } from 'graphql-ws';
+// import { createClient as createGraphqlWsClient } from 'graphql-ws';
 
 import {
   WORKSPACE_ENDPOINT,
@@ -16,7 +17,6 @@ import {
   WORKSPACE_ID,
   ENVIRONMENT_NAME,
 } from '../constants';
-import { OnTokenEvent } from '../../modules/auth/auth-events';
 
 /**
  * @param {object} headers - Extra header to the client.
@@ -36,8 +36,7 @@ export function createApolloClient(
   });
 
   const authLink = setContext((_, { headers: _headers }) => {
-    const token = OnTokenEvent.get()?.token;
-    // const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     return {
       headers: {
@@ -48,36 +47,56 @@ export function createApolloClient(
     };
   });
 
-  const wsLink = new GraphQLWsLink(
-    createGraphqlWsClient({
-      url: `${EIGHTBASE_WS_ENDPOINT}`,
+  const wsLink = new WebSocketLink({
+    uri: EIGHTBASE_WS_ENDPOINT,
+    options: {
+      reconnect: true,
       lazy: true,
-
       /**
-       * ConnectionParams.
-       *
-       * @returns Websocket payload.
+       * @returns - Connection Params.
        */
       connectionParams: () => {
-        const token = OnTokenEvent.get()?.token;
-        // const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         return {
           token,
           environmentName,
           workspaceId: WORKSPACE_ID,
         };
       },
-      webSocketImpl: class WebSocketWithoutProtocol extends WebSocket {
-        /**
-         * @param url - Url.
-         */
-        // eslint-disable-next-line @typescript-eslint/no-useless-constructor
-        constructor(url: string) {
-          super(url); // ignore protocol
-        }
-      },
-    })
-  );
+    },
+    webSocketImpl: class WebSocketWithoutProtocol extends WebSocket {
+      /* eslint-disable @typescript-eslint/no-useless-constructor */
+      /**
+       * @param url - Endpoint of websocket.
+       */
+      constructor(url: string) {
+        super(url); // ignore protocol
+      }
+    },
+  });
+
+  // const wsLink = new GraphQLWsLink(
+  //   createGraphqlWsClient({
+  //     url: EIGHTBASE_WS_ENDPOINT,
+  //     lazy: true,
+
+  //     /**
+  //      * ConnectionParams.
+  //      *
+  //      * @returns Websocket payload.
+  //      */
+  //     connectionParams: () => {
+  //       const token = localStorage.getItem('token');
+  //       return {
+  //         token,
+  //         environmentName,
+  //         workspaceId: WORKSPACE_ID,
+  //       };
+  //     },
+  //     // eslint-disable-next-line global-require
+  //     webSocketImpl: require('websocket').client, // eslint-disable-line @typescript-eslint/no-var-requires
+  //   })
+  // );
 
   const splitLink = split(
     ({ query }) => {

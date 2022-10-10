@@ -9,6 +9,8 @@ import { Loader } from '../../../shared/components/ui/Loader';
 export function Logout(): JSX.Element {
   const { logout } = useAuth0();
   useEffect(() => {
+    localStorage.removeItem('token');
+
     logout({
       returnTo: window.location.origin,
     });
