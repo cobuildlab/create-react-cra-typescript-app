@@ -18,6 +18,7 @@ export const ROUTES = {
   AUTH: '/auth',
   AUTH_CALLBACK: '/auth/callback',
   DASHBOARD: '/dashboard',
+  TEAM: '/team',
   HOME: '/',
   LOGOUT: '/logout',
 };

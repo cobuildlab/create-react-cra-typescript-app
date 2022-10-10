@@ -10,7 +10,11 @@ export function AuthView(): JSX.Element {
   const { loginWithRedirect } = useAuth0();
 
   useEffect(() => {
-    loginWithRedirect();
+    loginWithRedirect({
+      appState: {
+        redirectTo: window.location.pathname,
+      },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

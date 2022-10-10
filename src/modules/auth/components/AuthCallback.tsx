@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Loader } from '../../../shared/components/ui/Loader';
 import { ROUTES } from '../../../shared/constants';
@@ -11,6 +11,8 @@ import { handleAuthentication } from '../auth-actions';
  */
 export function AuthCallback(): JSX.Element {
   const { user, getIdTokenClaims, isAuthenticated } = useAuth0();
+  const location = useLocation();
+  const { state } = location;
   const navigate = useNavigate();
 
   const fetchToken = useCallback(async () => {
@@ -27,7 +29,7 @@ export function AuthCallback(): JSX.Element {
           localStorage.setItem('token', token);
 
           handleAuthentication(user.email as string).finally(() =>
-            navigate(ROUTES.DASHBOARD)
+            navigate(state.returnTo || ROUTES.DASHBOARD)
           );
         }
       });

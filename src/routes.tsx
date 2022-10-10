@@ -13,7 +13,21 @@ export const DashboardLazyView = withAuthenticationRequired(
     import('./modules/dashboard/DashboardView').then((module) => ({
       default: module.DashboardView,
     }))
-  )
+  ),
+  {
+    onRedirecting: () => <Loader fullPage />, // eslint-disable-line jsdoc/require-jsdoc
+  }
+);
+
+export const TeamLazyView = withAuthenticationRequired(
+  lazy(() =>
+    import('./modules/team/TeamView').then((module) => ({
+      default: module.TeamView,
+    }))
+  ),
+  {
+    onRedirecting: () => <Loader fullPage />, // eslint-disable-line jsdoc/require-jsdoc
+  }
 );
 
 export const HomeLazyView = lazy(() =>
@@ -43,6 +57,14 @@ export const Routes: FC = () => (
       element={
         <Suspense fallback={<Loader fullPage />}>
           <DashboardLazyView />
+        </Suspense>
+      }
+    />
+    <Route
+      path={ROUTES.TEAM}
+      element={
+        <Suspense fallback={<Loader fullPage />}>
+          <TeamLazyView />
         </Suspense>
       }
     />
