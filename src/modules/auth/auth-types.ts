@@ -1,7 +1,3 @@
-export interface AuthDataType {
-  token: null | string;
-}
-
 export interface User {
   id: string;
   email: string;
