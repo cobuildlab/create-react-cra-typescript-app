@@ -1,12 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
+
+import { DashboardLayout } from '../../shared/components/ui/layouts/DashboardLayout';
 
 /**
- * @returns {JSX.Element} - Dash board view.
+ *
+ * @returns {JSX.Element} - Dashboard View.
  */
-export const Dashboard = (): JSX.Element => {
-  return (
-    <div>
-      <h1>Dashboard</h1>
-    </div>
-  );
-};
+export const DashboardView: FC = () => (
+  <DashboardLayout>Dashboard content</DashboardLayout>
+);

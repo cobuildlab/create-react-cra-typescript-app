@@ -5,6 +5,7 @@ export interface User {
     shareUrl: string;
   };
 }
+
 export interface SessionQuery {
   user: User;
 }

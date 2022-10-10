@@ -1,7 +1,11 @@
-import { ThemeProvider } from '@mui/styles';
-import React from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
+
 import { Routes } from './routes';
+import { Auth0ProviderWithHistory } from './shared/auth0/Auth0ProviderWithHistory';
+import { apolloClient } from './shared/apollo/client';
+import { Session } from './shared/components/Session';
 import { theme } from './shared/css/theme';
 
 /**
@@ -10,12 +14,17 @@ import { theme } from './shared/css/theme';
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Routes />
-      </ThemeProvider>
+      <Auth0ProviderWithHistory>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={theme}>
+            <Session>
+              <Routes />
+            </Session>
+          </ThemeProvider>
+        </ApolloProvider>
+      </Auth0ProviderWithHistory>
     </BrowserRouter>
   );
 }
 
-// eslint-disable-next-line import/no-default-export
-export default App;
+export { App };

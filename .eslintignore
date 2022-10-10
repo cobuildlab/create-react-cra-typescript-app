@@ -1,5 +1,5 @@
-#React
 node_modules
+coverage
 build
 public
 jest.config.ts

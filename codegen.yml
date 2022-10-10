@@ -1,0 +1,19 @@
+overwrite: true
+schema: ''
+documents: 'src/**/*.graphql'
+generates:
+  src/shared/types/generated.ts:
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      maybe: T
+      scalars:
+        JSON: {}
+        DateTime: string
+        Date: string
+        BigInt: string
+        Time: string

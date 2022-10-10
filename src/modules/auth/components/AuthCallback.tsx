@@ -1,26 +1,42 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useSetupAuth0Token } from '../auth-hooks';
-import { handleAuthentication } from '../auth-actions';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-// TODO add loading component
+import { Loader } from '../../../shared/components/ui/Loader';
+import { ROUTES } from '../../../shared/constants';
+import { handleAuthentication } from '../auth-actions';
+import { useLocalStorage } from '../../../shared/hooks/storage';
+import { useAuth } from '../auth-hooks';
+
 /**
  * @returns {JSX.Element} - Auth callback component.
  */
 export function AuthCallback(): JSX.Element {
   const { user, isAuthenticated } = useAuth0();
+  const { getToken } = useAuth();
+  const { init, setItem } = useLocalStorage();
+  const location = useLocation();
+  const { state } = location;
   const navigate = useNavigate();
 
-  useSetupAuth0Token();
-
   useEffect(() => {
-    if (isAuthenticated && user && user.email) {
-      handleAuthentication(user.email).finally(() => navigate('/'));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated]);
+    if (isAuthenticated) {
+      // init local storage
+      init();
 
-  // NOT ADD LOADING COMPONENT HERE this must be a loading auth component
-  return <div>authenticated....</div>;
+      getToken().then((token) => {
+        if (token && user) {
+          setItem('token', token);
+
+          handleAuthentication(user.email as string).finally(() =>
+            navigate(state.returnTo || ROUTES.DASHBOARD)
+          );
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getToken, isAuthenticated]);
+
+  return <Loader fullPage />;
 }
