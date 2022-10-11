@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Loader } from '../../../shared/components/ui/Loader';
 import { ROUTES } from '../../../shared/constants';
-import { handleAuthentication } from '../auth-actions';
 import { useLocalStorage } from '../../../shared/hooks/storage';
 import { useAuth } from '../auth-hooks';
 
@@ -13,7 +12,7 @@ import { useAuth } from '../auth-hooks';
  */
 export function AuthCallback(): JSX.Element {
   const { user, isAuthenticated } = useAuth0();
-  const { getToken } = useAuth();
+  const { getToken, handleAuthentication } = useAuth();
   const { init, setItem } = useLocalStorage();
   const location = useLocation();
   const { state } = location;
